@@ -1,11 +1,12 @@
 import {  useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hook/useAuth";
+import { Tooltip } from "react-tooltip";
 
 
 const Navbar = () => {
   const [theme, setTheme] = useState(["light"]);
-  const {user}=useAuth()
+  const {user,logOut}=useAuth()
 
   const handleToggle = (e) => {
     if (e.target.checked) {
@@ -109,7 +110,7 @@ const Navbar = () => {
           </label>
         </div>
         <div>
-          {/* {user ? (
+          {user ? (
             <div className="flex items-center gap-2 md:gap-5">
               <a id="clickable">
                 <div className="avatar">
@@ -124,15 +125,15 @@ const Navbar = () => {
                 </div>
               </a>
               <Tooltip className="z-10" anchorSelect="#clickable" clickable>
-                <h2 className="font-semibold">{user.displayName}</h2> <br />
-                <button className="btn w-full" onClick={logOut}>SignOut</button>
+                <h2 className="font-semibold text-center">{user.displayName}</h2> <br />
+                <button className="btn btn-sm btn-secondary w-full" onClick={logOut}>SignOut</button>
               </Tooltip>
             </div>
           ) : (
             <Link to={`/login`}>
               <button className="btn btn-accent">Login</button>
             </Link>
-          )} */}
+          )}
         </div>
       </div>
     </div>
