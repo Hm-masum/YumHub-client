@@ -1,9 +1,11 @@
 import {  useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../hook/useAuth";
 
 
 const Navbar = () => {
   const [theme, setTheme] = useState(["light"]);
+  const {user}=useAuth()
 
   const handleToggle = (e) => {
     if (e.target.checked) {

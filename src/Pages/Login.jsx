@@ -1,48 +1,52 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import lgImg from "../assets/images/login/login.svg";
+import useAuth from "../hook/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  //   const { signIn, googleLogin, githubLogin } = useContext(AuthContext);
-  //   const location = useLocation();
-  //   const navigate = useNavigate();
+  const { signIn, googleLogin, githubLogin } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+    
+    try {
+      const result = await signIn(email, password);
+      // jwt
+      navigate(location.state || "/", { replace: true });
+      toast.success("User login successfully");
+    } catch (err) {
+      toast.error(err.message.split("/")[1].split(")")[0]);
+    }
+  };
 
-    console.log(email, password);
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await googleLogin();
+      // jwt
+      toast.success("User login successfully");
+      navigate(location.state || "/", { replace: true });
+    } catch (err) {
+      toast.error(err.message.split("/")[1].split(")")[0]);
+    }
+  };
 
-    // signIn(email, password)
-    //   .then((result) => {
-    //     toast.success("User login successfully");
-    //     if (result.user) {
-    //       navigate(location?.state || "/");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error.message.split("/")[1].split(")")[0]);
-    //   });
-    //   };
-
-    //handle googleLogin
-    //   const handleGoogleSignIn = () => {
-    //     googleLogin().then(() => {
-    //       toast.success("User login successfully");
-    //       navigate(location?.state || "/");
-    //     });
-    //   };
-
-    //   //handle githubSignIn
-    //   const handleGithubSignIn = () => {
-    //     githubLogin().then(() => {
-    //       toast.success("User login successfully");
-    //       navigate(location?.state || "/");
-    //     });
+  const handleGithubSignIn = async () => {
+    try {
+      const result = await githubLogin();
+      // jwt
+      toast.success("User login successfully");
+      navigate(location.state || "/", { replace: true });
+    } catch (err) {
+      toast.error(err.message.split("/")[1].split(")")[0]);
+    }
   };
 
   return (
@@ -105,13 +109,13 @@ const Login = () => {
             <div className="divider">Continue With</div>
             <div className="flex justify-center gap-4">
               <button
-                // onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
                 className="btn btn-outline btn-accent"
               >
                 Google{" "}
               </button>
               <button
-                // onClick={handleGithubSignIn}
+                onClick={handleGithubSignIn}
                 className="btn btn-outline btn-secondary"
               >
                 Github{" "}
