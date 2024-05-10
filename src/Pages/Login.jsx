@@ -97,7 +97,7 @@ const Login = () => {
             <div>
               <p className="text-lg">
                 Have an account?{" "}
-                <Link className="font-semibold text-primary" to={"/signup"}>
+                <Link className="font-semibold text-primary" to={"/register"}>
                   Sign In
                 </Link>
               </p>
