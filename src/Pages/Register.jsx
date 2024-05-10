@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import lgImg from "../assets/images/login/login.svg";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
+import useAuth from "../hook/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { createUser, updateUserProfile, setUser } =useAuth()
+  const navigate = useNavigate()
 
-  const handleRegister = (e) => {
+  const handleRegister = async(e) => {
     e.preventDefault();
       const form = e.target;
       const name = form.name.value;
@@ -15,6 +19,18 @@ const Register = () => {
       const password = form.password.value;
 
       console.log(name,photo,email,password)
+
+      try {
+        const result = await createUser(email, password)
+        toast.success('User created successfully')
+        await updateUserProfile(name, photo)
+        setUser({ ...result?.user, photoURL: photo, displayName: name })
+        navigate('/')
+      } 
+      catch (err) {
+        console.log(err)
+        toast.error(err.message.split("/")[1].split(")")[0])
+      }
 
   };
   return (
