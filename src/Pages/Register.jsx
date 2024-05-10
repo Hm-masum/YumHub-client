@@ -16,26 +16,14 @@ const Register = () => {
 
       console.log(name,photo,email,password)
 
-    //   if (password.length < 6) {
-    //     toast.error("password should be 6 character")
-    //     return;
-    //   }
-    //   else if (!/[A-Z]/.test(password)) {
-    //     toast.error("Your password should have at least 1 Uppercase character")
-    //     return;
-    //   }
-    //   else if (!/[a-z]/.test(password)) {
-    //     toast.error("Your password should have at least 1 Lowercase character")
-    //     return;
-    //   }
   };
   return (
     <div className="hero my-4">
       <div className="hero-content lg:gap-20 flex-col lg:flex-row-reverse">
-        <div className="w-1/2">
+        <div className="md:w-1/2">
           <img src={lgImg} alt="" />
         </div>
-        <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card md:w-1/2 lg:shadow-2xl bg-base-100">
           <div className="card-body">
             <h2 className="text-3xl font-semibold text-center">Register</h2>
             <form onSubmit={handleRegister}>

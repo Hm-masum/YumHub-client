@@ -48,10 +48,10 @@ const Login = () => {
   return (
     <div className="hero my-4">
       <div className="hero-content lg:gap-20 flex-col lg:flex-row">
-        <div className="w-1/2">
+        <div className="md:w-1/2">
           <img src={lgImg} alt="" />
         </div>
-        <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card md:w-1/2 shrink-0 w-full shadow-2xl bg-base-100">
           <div className="card-body">
             <h2 className="text-3xl font-semibold text-center">Login</h2>
             <form onSubmit={handleLogin}>
