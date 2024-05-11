@@ -1,8 +1,11 @@
+import toast from "react-hot-toast";
 import useAuth from "../hook/useAuth";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 
 const AddFood = () => {
     const {user}=useAuth()
+    const axiosSecure=useAxiosSecure()
 
     const handleAddFood = async e => {
         e.preventDefault()
@@ -30,6 +33,14 @@ const AddFood = () => {
             }
         }
         console.log(foodData)
+
+        try{
+          await axiosSecure.post(`/food`,foodData)
+          toast.success('Job Data Updated Successfully!')
+        }
+        catch (err){
+          console.log(err)
+        }
     }
 
 
