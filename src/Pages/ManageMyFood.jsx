@@ -20,7 +20,7 @@ const ManageMyFood = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { data } = await axiosSecure.delete(`/job/${id}`);
+      const { data } = await axiosSecure.delete(`/food/${id}`);
       console.log(data);
       toast.success("Delete Successful");
 
@@ -126,7 +126,7 @@ const ManageMyFood = () => {
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center gap-x-6">
                           <button
-                            onClick={() => handleDelete(job._id)}
+                            onClick={() => handleDelete(food._id)}
                             className="text-black btn btn-circle btn-sm btn-outline hover:text-orange-600 focus:outline-none"
                           >
                             <svg
