@@ -49,7 +49,7 @@ const FoodDetails = () => {
       <Modal
         isOpen={visible}
         onRequestClose={() => setVisible(false)}
-        style={{ overlay: { background: "" } }}
+        style={{ overlay: { background: "gray" } }}
       >
         <div className="p-2 md:p-6">
           <h2 className="text-3xl mb-6 text-center font-semibold">
@@ -179,14 +179,14 @@ const FoodDetails = () => {
               </div>
             </div>
             {/* button */}
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center">
               <input
                 type="submit"
                 value="Request"
-                className=" btn w-1/2 text-white bg-accent"
+                className=" btn text-white btn-outline btn-accent"
               />
               <button
-                className="btn w-1/2 text-white bg-accent"
+                className="btn text-white btn-outline px-7 btn-secondary"
                 onClick={() => setVisible(false)}
               >
                 Close

@@ -4,22 +4,27 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import lgImg from "../assets/images/login/login.svg";
 import useAuth from "../hook/useAuth";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { signIn, googleLogin, githubLogin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure=useAxiosSecure()
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    
+
     try {
       const result = await signIn(email, password);
       // jwt
+      const {data}= await axiosSecure.post(`/jwt`,{email:result?.user?.email})
+      console.log(data)
+          
       navigate(location.state || "/", { replace: true });
       toast.success("User login successfully");
     } catch (err) {
@@ -31,6 +36,9 @@ const Login = () => {
     try {
       const result = await googleLogin();
       // jwt
+      const {data}= await axiosSecure.post(`/jwt`,{email:result?.user?.email})
+      console.log(data)
+
       toast.success("User login successfully");
       navigate(location.state || "/", { replace: true });
     } catch (err) {
@@ -42,6 +50,9 @@ const Login = () => {
     try {
       const result = await githubLogin();
       // jwt
+      const {data}= await axiosSecure.post(`/jwt`,{email:result?.user?.email})
+      console.log(data)
+      
       toast.success("User login successfully");
       navigate(location.state || "/", { replace: true });
     } catch (err) {

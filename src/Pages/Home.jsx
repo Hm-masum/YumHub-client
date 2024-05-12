@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../hook/useAxiosSecure";
-import axios from "axios";
 import FoodCart from "../components/FoodCart";
+import axios from "axios";
 
 const Home = () => {
-  const axiosSecure = useAxiosSecure();
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axiosSecure(`/foods`);
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/foods`);
       setFoods(data);
     };
     getData();

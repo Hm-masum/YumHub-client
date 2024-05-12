@@ -4,11 +4,14 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import useAuth from "../hook/useAuth";
 import toast from "react-hot-toast";
+import axios from "axios";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, updateUserProfile, setUser } =useAuth()
   const navigate = useNavigate()
+  const axiosSecure=useAxiosSecure()
 
   const handleRegister = async(e) => {
     e.preventDefault();
@@ -25,6 +28,9 @@ const Register = () => {
         toast.success('User created successfully')
         await updateUserProfile(name, photo)
         setUser({ ...result?.user, photoURL: photo, displayName: name })
+        // jwt
+        const {data}= await axiosSecure.post(`/jwt`,{email:result?.user?.email})
+        console.log(data)
         navigate('/')
       } 
       catch (err) {
