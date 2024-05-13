@@ -36,7 +36,7 @@ const ManageMyFood = () => {
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-gray-800 ">My Added Foods</h2>
         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
-          {foods.length}
+          {foods.length} Food
         </span>
       </div>
 
@@ -94,7 +94,7 @@ const ManageMyFood = () => {
                       </td>
 
                       <td className="px-4 py-4 text-sm text-black whitespace-nowrap">
-                        {food.expired_date}
+                        {new Date(food.expired_date).toLocaleDateString()}
                       </td>
 
                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">

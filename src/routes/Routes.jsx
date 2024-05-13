@@ -8,6 +8,10 @@ import PrivateRoutes from "./PrivateRoutes";
 import FoodDetails from "../Pages/FoodDetails";
 import ManageMyFood from "../Pages/ManageMyFood";
 import UpdateFood from "../Pages/UpdateFood";
+import AvailableFood from "../Pages/AvailableFood";
+import FoodReq from "../Pages/FoodReq";
+
+
 
 const router = createBrowserRouter([
   {
@@ -42,6 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/available-food",
+        element:<PrivateRoutes><AvailableFood></AvailableFood></PrivateRoutes>
       },
       {
         path: "/manage-myFood",
@@ -49,6 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/myFood-req",
+        element:<PrivateRoutes><FoodReq></FoodReq></PrivateRoutes>
       },
     ],
   },

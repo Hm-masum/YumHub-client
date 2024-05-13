@@ -2,11 +2,18 @@ import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Modal from "react-modal";
 import useAuth from "../hook/useAuth";
+import useAxiosSecure from "../hook/useAxiosSecure";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import toast from "react-hot-toast";
 
 const FoodDetails = () => {
   const foodDetails = useLoaderData();
   const [visible, setVisible] = useState(false);
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const [startDate, setStartDate] = useState(new Date());
+
   const {
     _id,
     food_name,
@@ -25,6 +32,7 @@ const FoodDetails = () => {
     const notes = form.notes.value;
     const email = user?.email;
     const status = "Requested";
+    const requested_date= startDate;
 
     const requestData = {
       _id,
@@ -32,19 +40,76 @@ const FoodDetails = () => {
       notes,
       location,
       expired_date,
+      requested_date,
       photo,
       status,
+      email,
       donar,
     };
-    console.log(requestData)
+    console.log(requestData);
+
+    try {
+      const { data1 } = await axiosSecure.post(`/Req-Food`, requestData);
+      
+      const { data2 } = await axiosSecure.patch(`/food/${_id}`, { status });
+      toast.success("Action permitted!");
+      console.log(data1,data2);
+    } catch (err) {
+      console.log("Hi, i am error", err.message);
+      e.target.reset();
+    }
   };
 
   return (
     <div>
-      <img src={photo} alt="" />
-      <button className="btn" onClick={() => setVisible(true)}>
-        Request
-      </button>
+      <div className="lg:flex justify-center items-center gap-8 my-4 lg:my-10">
+        <div className="flex justify-center items-center rounded-2xl lg:w-[50%]">
+          <img className="rounded-2xl lg:h-[450px]" src={photo} alt="" />
+        </div>
+        <div className="space-y-4 lg:w-[50%]">
+          <h1 className="text-2xl lg:text-4xl font-semibold">{food_name}</h1>
+          <p className="text-xl">Status : {status}</p>
+          <p className="border-t-2 border-gray-300"></p>
+          <p>
+            <span className="font-semibold">Additional Notes : {notes}</span>
+          </p>
+          <p className="border-t-2 border-gray-300"></p>
+          <div className="space-y-2">
+            <p className="flex items-center">
+              <span className="w-[30%]">Quantity: </span>
+              <span className="font-semibold">{quantity}</span>
+            </p>
+            <p className="flex items-center">
+              <span className="w-[30%]">Expire Date: </span>
+              <span className="font-semibold">{new Date(expired_date).toLocaleDateString()}</span>
+            </p>
+            <p className="flex items-center">
+              <span className="w-[30%]">location: </span>
+              <span className="font-semibold">{location}</span>
+            </p>
+          </div>
+          <p className="border-t-2 border-gray-300"></p>
+          <div className="flex justify-between items-center">
+            <div className="avatar">
+              <div className="w-12 rounded-full">
+                <img src={donar.photo} />
+              </div>
+            </div>
+            <div>
+              <p>Donar Name: {donar.name}</p>
+              <p>Donar Email: {donar.email}</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <button
+              className="btn btn-outline px-6 btn-accent"
+              onClick={() => setVisible(true)}
+            >
+              Request
+            </button>
+          </div>
+        </div>
+      </div>
 
       <Modal
         isOpen={visible}
@@ -135,6 +200,7 @@ const FoodDetails = () => {
                   type="text"
                   name="notes"
                   placeholder="Additional notes"
+                  required
                   className="input input-bordered w-full"
                 />
               </div>
@@ -160,7 +226,7 @@ const FoodDetails = () => {
                 <input
                   type="text"
                   name="expired_date"
-                  defaultValue={expired_date}
+                  defaultValue={new Date(expired_date).toLocaleDateString()}
                   className="input input-bordered w-full"
                   disabled
                 />
@@ -169,12 +235,11 @@ const FoodDetails = () => {
                 <label className="label">
                   <span className="label-text">Requested Date</span>
                 </label>
-                <input
-                  type="text"
-                  name="expired_date"
-                  placeholder="Requested Date"
-                  className="input input-bordered w-full"
+                <DatePicker
+                  className="border p-3 w-full rounded-md"
+                  selected={startDate}
                   disabled
+                  onChange={(date) => setStartDate(date)}
                 />
               </div>
             </div>
