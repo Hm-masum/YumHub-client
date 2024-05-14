@@ -107,7 +107,7 @@ const Register = () => {
               </div>
               <br />
               <input
-                className="btn btn-accent w-full"
+                className="btn btn-outline bg-red-500 text-white w-full"
                 type="submit"
                 value="Register"
               />

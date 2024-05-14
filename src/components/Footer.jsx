@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Footer = () => {
   return (
     <div className="bg-gray-800 py-10">
@@ -16,9 +18,16 @@ const Footer = () => {
           </svg>
           <div className="font-bold">
             <h2 className="text-2xl">
-              Craft<span className="text-accent">Verse</span>
+              Yum<span className="text-red-500">Hub</span>
             </h2>
-            <p>Providing reliable art and craft since 1992</p>
+            <div className="grid grid-cols-3 md:grid-cols-5 my-3">
+              <h2><NavLink to={`/`}>Home</NavLink></h2>
+              <h2><NavLink to={`/available-food`}>Available Food</NavLink></h2>
+              <h2><NavLink to={`/add-food`}>Add Food</NavLink></h2>
+              <h2><NavLink to={`/manage-myFood`}>Manage MyFood</NavLink></h2>
+              <h2><NavLink to={`/myFood-req`}>MyFood Req</NavLink></h2>
+            </div>
+            <p>Providing reliable food since 1992</p>
           </div>
           <p>Copyright © 2024 - All right reserved</p>
         </aside>

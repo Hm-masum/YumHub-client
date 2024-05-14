@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const FoodCart = ({ food }) => {
+const FoodCart = ({ food,layout }) => {
   const {
     _id,
     food_name,
@@ -12,10 +12,11 @@ const FoodCart = ({ food }) => {
     status,
     donar
   } = food;
+
   return (
-    <div className="p-4 rounded-xl hover:scale-105 hover:border-accent border-opacity-3 border-2 border-gray-100 space-y-3">
+    <div className="p-4 rounded-xl hover:scale-105 hover:border-red-500 border-opacity-3 border-2 border-gray-100 space-y-3">
       <div className="flex justify-center items-center rounded-2xl">
-        <img src={photo} className="h-[200px] w-full rounded-lg" alt="" />
+        <img src={photo} className={`w-full rounded-lg ${layout=== true ? 'h-[300px]':'h-[200px]'}`} alt="" />
       </div>
       <div className="space-y-3">
         <div className="flex gap-2" title={notes}>{notes.substring(0,40)}.....</div>
@@ -39,7 +40,7 @@ const FoodCart = ({ food }) => {
           </p>
         </div>
         <div className="flex items-center justify-center">
-          <Link to={`/food/${_id}`} className="btn w-full btn-accent">
+          <Link to={`/food/${_id}`} className="btn w-full text-white btn-outline bg-red-500">
             View Details
           </Link>
         </div>

@@ -10,6 +10,7 @@ import ManageMyFood from "../Pages/ManageMyFood";
 import UpdateFood from "../Pages/UpdateFood";
 import AvailableFood from "../Pages/AvailableFood";
 import FoodReq from "../Pages/FoodReq";
+import ErrorPage from "../Pages/ErrorPage";
 
 
 
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/available-food",
-        element:<PrivateRoutes><AvailableFood></AvailableFood></PrivateRoutes>
+        element:<AvailableFood></AvailableFood>
       },
       {
         path: "/manage-myFood",

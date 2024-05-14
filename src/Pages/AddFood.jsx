@@ -4,6 +4,7 @@ import useAxiosSecure from "../hook/useAxiosSecure";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const AddFood = () => {
   const { user } = useAuth();
@@ -14,7 +15,8 @@ const AddFood = () => {
     e.preventDefault();
     const form = e.target;
     const food_name = form.food_name.value;
-    const quantity = form.quantity.value;
+    const Quantity = form.quantity.value;
+    const quantity = parseInt(Quantity);
     const notes = form.notes.value;
     const location = form.location.value;
     const expired_date = startDate;
@@ -39,9 +41,14 @@ const AddFood = () => {
 
     try {
       await axiosSecure.post(`/food`, foodData);
-      toast.success("Job Data Updated Successfully!");
+      Swal.fire({
+        title: "Success!",
+        text: "Add Food Successfully",
+        icon: "success",
+        confirmButtonText: "Cool",
+      });
     } catch (err) {
-      console.log(err);
+      toast.error(err.message)
     }
   };
 
@@ -102,11 +109,11 @@ const AddFood = () => {
             <label className="label">
               <span className="label-text">Expired Date</span>
             </label>
-             <DatePicker
-                className="border p-3 w-full rounded-md"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-             />
+            <DatePicker
+              className="border p-3 w-full rounded-md"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />
           </div>
         </div>
         <div className="md:flex gap-4 mb-4">
@@ -125,24 +132,19 @@ const AddFood = () => {
             <label className="label">
               <span className="label-text">Food Status</span>
             </label>
-            <select
-              name="status"
-              id="status"
-              className="w-full p-3 border rounded-md focus:outline-[#FF497C]"
+            <input
               type="text"
-              placeholder="Food Status"
-            >
-              <option value="available" selected>
-                available
-              </option>
-              <option value="unavailable">unavailable</option>
-            </select>
+              name="status"
+              defaultValue={"Available"}
+              value={"available"}
+              className="input input-bordered w-full"
+            />
           </div>
         </div>
         <input
           type="submit"
           value="Add Food"
-          className="btn text-white btn-block bg-accent"
+          className="btn text-white btn-block bg-red-500"
         />
       </form>
     </div>

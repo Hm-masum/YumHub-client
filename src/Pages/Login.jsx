@@ -104,7 +104,7 @@ const Login = () => {
               </div>
               <br />
               <input
-                className="btn btn-accent w-full"
+                className="btn text-white bg-red-500 w-full"
                 type="submit"
                 value="Login"
               />
@@ -121,7 +121,7 @@ const Login = () => {
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleGoogleSignIn}
-                className="btn btn-outline btn-accent"
+                className="btn btn-outline btn-error"
               >
                 Google{" "}
               </button>

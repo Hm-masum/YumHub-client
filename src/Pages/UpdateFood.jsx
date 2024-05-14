@@ -5,12 +5,14 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const UpdateFood = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const food = useLoaderData();
-  const [startDate, setStartDate] = useState(new Date());
+  const axiosSecure=useAxiosSecure()
 
   const {
     _id,
@@ -23,16 +25,20 @@ const UpdateFood = () => {
     status,
   } = food;
 
+  const [startDate, setStartDate] = useState(
+    new Date(expired_date) || new Date()
+  );
+
   const handleUpdateFood = async (e) => {
     e.preventDefault();
     const form = e.target;
     const food_name = form.food_name.value;
-    const quantity = form.quantity.value;
+    const Quantity = form.quantity.value;
+    const quantity = parseInt(Quantity);
     const notes = form.notes.value;
     const location = form.location.value;
     const expired_date = startDate;
     const photo = form.photo.value;
-    const status = form.status.value;
     const foodData = {
       food_name,
       quantity,
@@ -49,12 +55,15 @@ const UpdateFood = () => {
     };
 
     try {
-      const { data } = await axios.put(
-        `${import.meta.env.VITE_API_URL}/update-food/${_id}`,
-        foodData
-      );
-      console.log(data);
-      toast.success("food Data Updated Successfully!");
+      const { data } = await axiosSecure.put(`/update-food/${_id}`, foodData);
+      if (data.modifiedCount > 0) {
+        Swal.fire({
+          title: "Success!",
+          text: "Food Updated Successfully",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+      }
       navigate("/manage-myFood");
     } catch (err) {
       toast.error(err.message);
@@ -140,24 +149,18 @@ const UpdateFood = () => {
             <label className="label">
               <span className="label-text">Food Status</span>
             </label>
-            <select
-              name="status"
-              id="status"
-              className="w-full p-3 border rounded-md focus:outline-[#FF497C]"
+            <input
               type="text"
               defaultValue={status}
-            >
-              <option value="available" selected>
-                available
-              </option>
-              <option value="unavailable">unavailable</option>
-            </select>
+              value={status}
+              className="input input-bordered w-full"
+            />
           </div>
         </div>
         <input
           type="submit"
           value="Update Food"
-          className="btn btn-block btn-outline btn-accent"
+          className="btn btn-block btn-outline text-white bg-red-500"
         />
       </form>
     </div>

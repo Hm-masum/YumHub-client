@@ -3,6 +3,7 @@ import useAxiosSecure from "../hook/useAxiosSecure";
 import useAuth from "../hook/useAuth";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ManageMyFood = () => {
   const axiosSecure = useAxiosSecure();
@@ -19,22 +20,37 @@ const ManageMyFood = () => {
   };
 
   const handleDelete = async (id) => {
-    try {
-      const { data } = await axiosSecure.delete(`/food/${id}`);
-      console.log(data);
-      toast.success("Delete Successful");
-
-      //refresh ui
-      getData();
-    } catch (err) {
-      toast.error(err.message);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = axiosSecure.delete(`/food/${id}`);
+          console.log(data);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          getData();
+          
+        } catch (err) {
+          toast.error(err.message);
+        }
+      }
+    });
   };
 
   return (
     <section className="container px-4 mx-auto pt-12">
       <div className="flex items-center gap-x-3">
-        <h2 className="text-lg font-medium text-gray-800 ">My Added Foods</h2>
+        <h2 className="text-lg font-medium">My Added Foods</h2>
         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
           {foods.length} Food
         </span>
@@ -100,28 +116,27 @@ const ManageMyFood = () => {
                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">
                         {food.status}
                       </td>
-                      <td
-                        className="px-4 py-4 text-sm  whitespace-nowrap"
-                      >
-                         <Link
-                            to={`/update/${food._id}`}
-                            className="text-black btn btn-circle btn-sm btn-outline
-                            hover:text-accent focus:outline-none">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              className="w-5 h-5"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                              />
-                            </svg>
-                          </Link>
+                      <td className="px-4 py-4 text-sm  whitespace-nowrap">
+                        <Link
+                          to={`/update/${food._id}`}
+                          className="text-black btn btn-circle btn-sm btn-outline
+                            hover:text-accent focus:outline-none"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                            />
+                          </svg>
+                        </Link>
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center gap-x-6">

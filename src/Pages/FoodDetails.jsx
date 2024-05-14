@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import useAuth from "../hook/useAuth";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const FoodDetails = () => {
   const foodDetails = useLoaderData();
@@ -13,6 +14,7 @@ const FoodDetails = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [startDate, setStartDate] = useState(new Date());
+  const navigate=useNavigate()
 
   const {
     _id,
@@ -52,10 +54,16 @@ const FoodDetails = () => {
       const { data1 } = await axiosSecure.post(`/Req-Food`, requestData);
       
       const { data2 } = await axiosSecure.patch(`/food/${_id}`, { status });
-      toast.success("Action permitted!");
-      console.log(data1,data2);
+      Swal.fire({
+        title: "Success!",
+        text: "Food Request Successfully",
+        icon: "success",
+        confirmButtonText: "Cool",
+      });
+      navigate(`/`)
     } catch (err) {
       console.log("Hi, i am error", err.message);
+      toast.error(err.message)
       e.target.reset();
     }
   };
@@ -102,7 +110,7 @@ const FoodDetails = () => {
           </div>
           <div className="text-center">
             <button
-              className="btn btn-outline px-6 btn-accent"
+              className="btn px-6 text-white btn-outline bg-red-500"
               onClick={() => setVisible(true)}
             >
               Request
@@ -248,10 +256,10 @@ const FoodDetails = () => {
               <input
                 type="submit"
                 value="Request"
-                className=" btn text-white btn-outline btn-accent"
+                className=" btn text-white btn-outline bg-red-500"
               />
               <button
-                className="btn text-white btn-outline px-7 btn-secondary"
+                className="btn text-white btn-outline px-7 bg-red-500"
                 onClick={() => setVisible(false)}
               >
                 Close

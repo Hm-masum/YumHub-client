@@ -28,19 +28,22 @@ const Navbar = () => {
         <NavLink to={`/`}>Home</NavLink>
       </li>
       <li>
+            <NavLink to={`/available-food`}>Available Food</NavLink>
+      </li>
+      {
+        user && <>
+          <li>
+            <NavLink to={`/add-food`}>Add Food</NavLink>
+          </li>
+          <li>
+            <NavLink to={`/manage-myFood`}>Manage MyFood</NavLink>
+         </li>
+          <li>
+            <NavLink to={`/myFood-req`}>MyFood Req</NavLink>
+          </li>
+        </>}
+      <li>
         <NavLink to={`/login`}>Login</NavLink>
-      </li>
-      <li>
-        <NavLink to={`/add-food`}>Add Food</NavLink>
-      </li>
-      <li>
-        <NavLink to={`/available-food`}>Available Food</NavLink>
-      </li>
-      <li>
-        <NavLink to={`/manage-myFood`}>Manage MyFood</NavLink>
-      </li>
-      <li>
-        <NavLink to={`/myFood-req`}>MyFood Req</NavLink>
       </li>
     </>
   );
@@ -73,7 +76,7 @@ const Navbar = () => {
           </ul>
         </div>
          <Link to={`/`} className="text-2xl font-semibold">
-          Yum<span className="text-accent">Hub</span>
+          Yum<span className="text-red-400">Hub</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -135,12 +138,12 @@ const Navbar = () => {
               </a>
               <Tooltip className="z-10" anchorSelect="#clickable" clickable>
                 <h2 className="font-semibold text-center">{user.displayName}</h2> <br />
-                <button className="btn btn-sm btn-secondary w-full" onClick={logOut}>SignOut</button>
+                <button className="btn btn-sm text-white bg-red-500 w-full" onClick={logOut}>SignOut</button>
               </Tooltip>
             </div>
           ) : (
             <Link to={`/login`}>
-              <button className="btn btn-accent">Login</button>
+              <button className="btn text-white bg-red-500">Login</button>
             </Link>
           )}
         </div>
