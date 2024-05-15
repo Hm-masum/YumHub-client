@@ -1,12 +1,12 @@
 *****YumHub*****
-*firebase
-*react router dom
-*TailwindCss
-*ReactIcon
-*React-hot-toast
-*SweetAlert2
-*Axios         
-*react-helmet-async
+*firebase                         
+*react router dom                        
+*TailwindCss                          
+*ReactIcon                       
+*React-hot-toast                         
+*SweetAlert2                     
+*Axios                                 
+*react-helmet-async                           
 *React modal           
 *swiper           
 *react tooltip
