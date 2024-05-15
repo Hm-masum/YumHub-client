@@ -4,6 +4,7 @@ import useAuth from "../hook/useAuth";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageMyFood = () => {
   const axiosSecure = useAxiosSecure();
@@ -49,6 +50,11 @@ const ManageMyFood = () => {
 
   return (
     <section className="container px-4 mx-auto pt-12">
+
+       <Helmet>
+          <title>YumHub | Manage My Food</title>
+       </Helmet>
+
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium">My Added Foods</h2>
         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">

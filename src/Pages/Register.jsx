@@ -6,6 +6,7 @@ import useAuth from "../hook/useAuth";
 import toast from "react-hot-toast";
 import axios from "axios";
 import useAxiosSecure from "../hook/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,6 +42,11 @@ const Register = () => {
   };
   return (
     <div className="hero my-4">
+
+        <Helmet>
+          <title>YumHub | Register</title>
+       </Helmet>
+
       <div className="hero-content lg:gap-20 flex-col lg:flex-row-reverse">
         <div className="md:w-1/2">
           <img src={lgImg} alt="" />

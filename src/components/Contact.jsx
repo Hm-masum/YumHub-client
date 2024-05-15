@@ -2,7 +2,7 @@ import { MdAddIcCall } from "react-icons/md";
 import { FaRocketchat } from "react-icons/fa";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 import { BsChatQuoteFill } from "react-icons/bs";
-
+import { motion } from "framer-motion";
 
 const Contact = () => {
     return (
@@ -12,7 +12,11 @@ const Contact = () => {
                 <h2 className="text-5xl font-semibold">Easy to contact us</h2>
                 <p>We always ready to help by providing the best services for you. We beleive a good blace to live can make your life better</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 rounded-lg">
-                    <div className="border p-4 rounded-lg ">
+                    <motion.div
+                     initial={{ x: -100, opacity: 0 }}
+                     whileInView={{ x: 0, opacity: 1 }}
+                     transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+                     className="border p-4 rounded-lg ">
                         <div className="flex space-x-7">
                             <div className="p-4 bg-red-100 rounded-lg">
                                 <MdAddIcCall className="text-black text-3xl"/>
@@ -23,8 +27,12 @@ const Contact = () => {
                             </div>
                         </div>
                         <button className="btn w-full my-2 text-blue-600">Call Now</button>
-                    </div>
-                    <div className="border p-4 rounded-lg">
+                    </motion.div>
+                    <motion.div
+                     initial={{ x: -100, opacity: 0 }}
+                     whileInView={{ x: 0, opacity: 1 }}
+                     transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+                     className="border p-4 rounded-lg">
                         <div className="flex space-x-7">
                             <div className="p-4 bg-red-100 rounded-lg">
                                 <FaRocketchat className="text-3xl text-black"/>
@@ -35,8 +43,12 @@ const Contact = () => {
                             </div>
                         </div>
                         <button className="btn w-full my-2 text-blue-600">Call Now</button>
-                    </div>
-                    <div className="border p-4 rounded-lg">
+                    </motion.div>
+                    <motion.div
+                     initial={{ x: -100, opacity: 0 }}
+                     whileInView={{ x: 0, opacity: 1 }}
+                     transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+                     className="border p-4 rounded-lg">
                         <div className="flex space-x-7">
                             <div className="p-4 bg-red-100 rounded-lg">
                                 <IoChatbubbleEllipsesSharp className="text-black text-3xl"/>
@@ -47,8 +59,12 @@ const Contact = () => {
                             </div>
                         </div>
                         <button className="btn w-full my-2 text-blue-600">Call Now</button>
-                    </div>
-                    <div className="border p-4 rounded-lg">
+                    </motion.div>
+                    <motion.div
+                     initial={{ x: -100, opacity: 0 }}
+                     whileInView={{ x: 0, opacity: 1 }}
+                     transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+                     className="border p-4 rounded-lg">
                         <div className="flex space-x-7">
                             <div className="p-4 bg-red-100 rounded-lg">
                                 <BsChatQuoteFill className="text-3xl text-black"/>
@@ -59,12 +75,16 @@ const Contact = () => {
                             </div>
                         </div>
                         <button className="btn w-full my-2 text-blue-600">Call Now</button>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
-            <div className="md:w-1/2">
+            <motion.div 
+             initial={{ x: 100, opacity: 0 }}
+             whileInView={{ x: 0, opacity: 1 }}
+             transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+             className="md:w-1/2">
                 <img className="h-200px md:h-[500px] rounded-tr-[60px] rounded-bl-[60px]" src="https://i.ibb.co/dD1x7Yv/pexels-mike-468229-1192056.jpg" alt="" />
-            </div>
+            </motion.div>
         </div>
     );
 };

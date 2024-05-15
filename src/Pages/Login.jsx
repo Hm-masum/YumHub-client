@@ -5,6 +5,7 @@ import lgImg from "../assets/images/login/login.svg";
 import useAuth from "../hook/useAuth";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hook/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -62,6 +63,11 @@ const Login = () => {
 
   return (
     <div className="hero my-4">
+
+       <Helmet>
+          <title>YumHub | Login</title>
+       </Helmet>
+
       <div className="hero-content lg:gap-20 flex-col lg:flex-row">
         <div className="md:w-1/2">
           <img src={lgImg} alt="" />

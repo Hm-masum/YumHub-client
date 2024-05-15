@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import FoodDetails from "./FoodDetails";
 import FoodCart from "../components/FoodCart";
+import { Helmet } from "react-helmet-async";
 
 const AvailableFood = () => {
   const [sort, setSort] = useState("");
@@ -33,6 +34,11 @@ const AvailableFood = () => {
 
   return (
     <div className="container py-10 mx-auto min-h-[calc(100vh-306px)] flex flex-col justify-between">
+
+       <Helmet>
+          <title>YumHub | Available Food</title>
+       </Helmet>
+
       <div>
         <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
           <form onSubmit={handleSearch}>

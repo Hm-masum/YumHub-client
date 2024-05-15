@@ -1,12 +1,14 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hook/useAuth";
+import ai from '../assets/images/Animation - 1715709373669.json'
+import Lottie from "lottie-react";
 
 const PrivateRoutes = ({children}) => {
     const {user,loading}=useAuth()
     const location=useLocation()
 
     if(loading){
-        return <div className="flex justify-center h-[50vh]"><span className="loading loading-bars loading-lg"></span></div>
+        return <Lottie className="mx-auto w-[500px] h-[500px]" animationData={ai}></Lottie>
     }
     if(user){
         return children;

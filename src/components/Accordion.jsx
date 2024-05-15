@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 const Accordion = () => {
   return (
     <div className="my-4 lg:my-12 space-y-5">
@@ -7,13 +8,21 @@ const Accordion = () => {
         concise, and comprehensive – your inquiries, our expertise.{" "}
       </p>
       <div className="md:flex items-center border-2 p-4 rounded-lg gap-6">
-        <div>
+        <motion.div
+         initial={{ x: -100, opacity: 0 }}
+         whileInView={{ x: 0, opacity: 1 }}
+         transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+        >
           <img
             className="rounded-2xl lg:h-[400px]"
             src="https://i.ibb.co/tJfnSbJ/pexels-suju-1132558.jpg"
           />
-        </div>
-        <div className="join join-vertical">
+        </motion.div>
+        <motion.div
+         initial={{ x: 100, opacity: 0 }}
+         whileInView={{ x: 0, opacity: 1 }}
+         transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+         className="join join-vertical">
           <div className="collapse collapse-arrow join-item">
             <input type="radio" name="my-accordion-4" defaultChecked />
             <div className="collapse-title text-xl font-medium">
@@ -67,7 +76,7 @@ const Accordion = () => {
               <p>Eye-catching discount and affordable price.</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AddFood = () => {
   const { user } = useAuth();
@@ -54,6 +55,11 @@ const AddFood = () => {
 
   return (
     <div className="border-2 rounded-xl p-4 md:p-10">
+       
+       <Helmet>
+          <title>YumHub | Add Food</title>
+       </Helmet>
+
       <h2 className="text-3xl mb-8 text-center font-semibold">Add Food</h2>
       <form onSubmit={handleAddFood}>
         <div className="md:flex gap-4 mb-4">
@@ -65,6 +71,7 @@ const AddFood = () => {
               type="text"
               name="food_name"
               placeholder="food_name"
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -76,6 +83,7 @@ const AddFood = () => {
               type="text"
               name="quantity"
               placeholder="quantity"
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -89,6 +97,7 @@ const AddFood = () => {
               type="text"
               name="notes"
               placeholder="notes"
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -101,6 +110,7 @@ const AddFood = () => {
             <input
               type="text"
               name="location"
+              required
               placeholder="Pickup Location"
               className="input input-bordered w-full"
             />
@@ -125,6 +135,7 @@ const AddFood = () => {
               type="text"
               name="photo"
               placeholder="Food Image"
+              required
               className="input input-bordered w-full"
             />
           </div>

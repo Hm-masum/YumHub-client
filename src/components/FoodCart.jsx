@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const FoodCart = ({ food,layout }) => {
   const {
@@ -14,7 +15,11 @@ const FoodCart = ({ food,layout }) => {
   } = food;
 
   return (
-    <div className="p-4 rounded-xl hover:scale-105 hover:border-red-500 border-opacity-3 border-2 border-gray-100 space-y-3">
+    <motion.div
+    initial={{ y: 100, opacity: 0 }}
+    whileInView={{ y: 0, opacity: 1 }}
+    transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:1},ease:"easeIn", duration:1}}
+     className="p-4 rounded-xl hover:scale-105 hover:border-red-500 border-opacity-3 border-2 border-gray-100 space-y-3">
       <div className="flex justify-center items-center rounded-2xl">
         <img src={photo} className={`w-full rounded-lg ${layout=== true ? 'h-[300px]':'h-[200px]'}`} alt="" />
       </div>
@@ -45,7 +50,7 @@ const FoodCart = ({ food,layout }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

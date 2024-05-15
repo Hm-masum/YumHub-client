@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hook/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const UpdateFood = () => {
   const { user } = useAuth();
@@ -71,6 +72,11 @@ const UpdateFood = () => {
   };
   return (
     <div className="border-2 rounded-xl p-4 md:p-10">
+
+      <Helmet>
+          <title>YumHub | Update Food</title>
+      </Helmet>
+
       <h2 className="text-3xl mb-8 text-center font-semibold">Update Food</h2>
       <form onSubmit={handleUpdateFood}>
         <div className="md:flex gap-4 mb-4">
@@ -82,6 +88,7 @@ const UpdateFood = () => {
               type="text"
               name="food_name"
               defaultValue={food_name}
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -93,6 +100,7 @@ const UpdateFood = () => {
               type="text"
               name="quantity"
               defaultValue={quantity}
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -106,6 +114,7 @@ const UpdateFood = () => {
               type="text"
               name="notes"
               defaultValue={notes}
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -119,6 +128,7 @@ const UpdateFood = () => {
               type="text"
               name="location"
               defaultValue={location}
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -142,6 +152,7 @@ const UpdateFood = () => {
               type="text"
               name="photo"
               defaultValue={photo}
+              required
               className="input input-bordered w-full"
             />
           </div>
@@ -153,6 +164,7 @@ const UpdateFood = () => {
               type="text"
               defaultValue={status}
               value={status}
+              required
               className="input input-bordered w-full"
             />
           </div>

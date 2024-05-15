@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hook/useAuth";
 import useAxiosSecure from "../hook/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const FoodReq = () => {
   const{user}=useAuth()
@@ -17,6 +18,11 @@ const FoodReq = () => {
 
   return (
     <section className="container px-4 mx-auto pt-12">
+
+       <Helmet>
+          <title>YumHub | Food Request</title>
+       </Helmet>
+
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium">My Food Request</h2>
         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">

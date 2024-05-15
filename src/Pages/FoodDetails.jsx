@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const FoodDetails = () => {
   const foodDetails = useLoaderData();
@@ -70,6 +71,11 @@ const FoodDetails = () => {
 
   return (
     <div>
+
+      <Helmet>
+          <title>YumHub | Food Details</title>
+      </Helmet>
+
       <div className="lg:flex justify-center items-center gap-8 my-4 lg:my-10">
         <div className="flex justify-center items-center rounded-2xl lg:w-[50%]">
           <img className="rounded-2xl lg:h-[450px]" src={photo} alt="" />
