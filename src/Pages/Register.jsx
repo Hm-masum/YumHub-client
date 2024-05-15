@@ -22,7 +22,7 @@ const Register = () => {
       const email = form.email.value;
       const password = form.password.value;
 
-      console.log(name,photo,email,password)
+      //console.log(name,photo,email,password)
 
       try {
         const result = await createUser(email, password)
@@ -31,11 +31,11 @@ const Register = () => {
         setUser({ ...result?.user, photoURL: photo, displayName: name })
         // jwt
         const {data}= await axiosSecure.post(`/jwt`,{email:result?.user?.email})
-        console.log(data)
+        //console.log(data)
         navigate('/')
       } 
       catch (err) {
-        console.log(err)
+        //console.log(err)
         toast.error(err.message.split("/")[1].split(")")[0])
       }
 

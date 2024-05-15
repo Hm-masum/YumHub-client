@@ -49,7 +49,7 @@ const FoodDetails = () => {
       email,
       donar,
     };
-    console.log(requestData);
+    //console.log(requestData);
 
     try {
       const { data1 } = await axiosSecure.post(`/Req-Food`, requestData);
@@ -63,7 +63,7 @@ const FoodDetails = () => {
       });
       navigate(`/`)
     } catch (err) {
-      console.log("Hi, i am error", err.message);
+      //console.log("Hi, i am error", err.message);
       toast.error(err.message)
       e.target.reset();
     }

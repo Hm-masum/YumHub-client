@@ -38,7 +38,7 @@ const AddFood = () => {
         photo: user?.photoURL,
       },
     };
-    console.log(foodData);
+    //console.log(foodData);
 
     try {
       await axiosSecure.post(`/food`, foodData);

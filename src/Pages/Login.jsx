@@ -38,7 +38,7 @@ const Login = () => {
       const result = await googleLogin();
       // jwt
       const {data}= await axiosSecure.post(`/jwt`,{email:result?.user?.email})
-      console.log(data)
+      // console.log(data)
 
       toast.success("User login successfully");
       navigate(location.state || "/", { replace: true });
@@ -52,7 +52,7 @@ const Login = () => {
       const result = await githubLogin();
       // jwt
       const {data}= await axiosSecure.post(`/jwt`,{email:result?.user?.email})
-      console.log(data)
+      //console.log(data)
       
       toast.success("User login successfully");
       navigate(location.state || "/", { replace: true });

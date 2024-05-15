@@ -33,7 +33,7 @@ const ManageMyFood = () => {
       if (result.isConfirmed) {
         try {
           const { data } = axiosSecure.delete(`/food/${id}`);
-          console.log(data);
+          //console.log(data);
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",

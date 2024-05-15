@@ -20,7 +20,7 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(user)
+  //console.log(user)
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = async() => {
-    const {data}=await axios(`${import.meta.env.VITE_API_URL}/logout`,{withCredentials:true})
+    const {data}=await axios.post(`${import.meta.env.VITE_API_URL}/logout`,{withCredentials:true})
     setUser(null)
     return signOut(auth);
   };
